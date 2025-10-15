@@ -1,3 +1,6 @@
+```mermaid
+erDiagram
+
 graph TB
     subgraph System["Project Management System"]
         UC1[Create Project]
