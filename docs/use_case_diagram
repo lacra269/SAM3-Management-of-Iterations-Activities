@@ -1,26 +1,24 @@
 ```mermaid
-erDiagram
-
 graph TB
-    subgraph System["Project Management System"]
-        UC1[Create Project]
-        UC2[Manage Iterations]
-        UC3[Create Activity/Task]
-        UC4[Assign Task to Member]
-        UC5[Update Task Status]
-        UC6[View Dashboard]
-        UC7[Generate Reports]
-        UC8[Manage Team Members]
-        UC9[Track Project Progress]
-        UC10[Comment on Tasks]
-        UC11[Manage User Accounts]
+    subgraph "System: Project Management System"
+        UC1["Create Project"]
+        UC2["Manage Iterations"]
+        UC3["Create Activity/Task"]
+        UC4["Assign Task to Member"]
+        UC5["Update Task Status"]
+        UC6["View Dashboard"]
+        UC7["Generate Reports"]
+        UC8["Manage Team Members"]
+        UC9["Track Project Progress"]
+        UC10["Comment on Tasks"]
+        UC11["Manage User Accounts"]
     end
     
-    PM[Project Manager]
-    DEV[Developer]
-    ANA[Analyst]
-    TEST[Tester]
-    ADMIN[System Admin]
+    PM["Project Manager"]
+    DEV["Developer"]
+    ANA["Analyst"]
+    TEST["Tester"]
+    ADMIN["System Admin"]
     
     PM --> UC1
     PM --> UC2
@@ -49,4 +47,3 @@ graph TB
     UC4 -.includes.-> UC8
     UC3 -.includes.-> UC2
     UC2 -.includes.-> UC1
-yaml
