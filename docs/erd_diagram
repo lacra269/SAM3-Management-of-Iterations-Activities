@@ -1,0 +1,29 @@
+```mermaid
+classDiagram
+    class Project {
+        +int id
+        +string name
+        +string description
+        +date startDate
+        +date endDate
+        +ProjectStatus status
+        +int createdById
+        +date createdAt
+        +calculateProgress() decimal
+        +isOverdue() bool
+    }
+    
+    class Iteration {
+        +int id
+        +int projectId
+        +string name
+        +string goal
+        +date startDate
+        +date endDate
+        +IterationStatus status
+        +calculateProgress() decimal
+        +getTotalTasks() int
+        +getCompletedTasks() int
+    }
+
+    ...restul codului...
