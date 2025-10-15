@@ -1,4 +1,4 @@
-'''mermaid 
+```mermaid
 graph TB
     subgraph System["Project Management System"]
         UC1[Create Project]
