@@ -1,9 +1,42 @@
+////package com.dam.pms.domain.entity;
+////
+////import jakarta.persistence.*;
+////import lombok.Data;
+////import com.dam.pms.domain.enums.IterationStatus;
+////
+////import java.util.List;
+////
+////@Entity
+////@Data
+////public class Iteration {
+////
+////    @Id
+////    @GeneratedValue(strategy = GenerationType.IDENTITY)
+////    private Long id;
+////
+////    private String name;
+////    private Integer number;
+////
+////    @Enumerated(EnumType.STRING)
+////    private IterationStatus status;
+////
+////    private Double progress = 0.0;
+////
+////    @ManyToOne
+////    @JoinColumn(name = "project_id")
+////    private Project project;
+////
+////    @OneToMany(mappedBy = "iteration", cascade = CascadeType.ALL, orphanRemoval = true)
+////    private List<Activity> activities;
+////}
 //package com.dam.pms.domain.entity;
 //
-//
-//
+//import com.fasterxml.jackson.annotation.JsonBackReference;
 //import jakarta.persistence.*;
 //import lombok.Data;
+//import com.dam.pms.domain.enums.IterationStatus;
+//
+//import java.util.ArrayList;
 //import java.util.List;
 //
 //@Entity
@@ -15,22 +48,33 @@
 //    private Long id;
 //
 //    private String name;
-//    private Integer iterationNumber;
+//    private Integer number;
+//
+//    @Enumerated(EnumType.STRING)
+//    private IterationStatus status;
+//
+//    private Double progress = 0.0;
 //
 //    @ManyToOne
 //    @JoinColumn(name = "project_id")
+//    @JsonBackReference("project-iterations")  // ← ADAUGĂ ASTA ALĂTURI
 //    private Project project;
 //
-//    @OneToMany(mappedBy = "iteration")
-//    private List<Activity> activities;
+//    @OneToMany(mappedBy = "iteration", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Activity> activities = new ArrayList<>();
+//
 //}
+
 
 package com.dam.pms.domain.entity;
 
-import com.dam.pms.domain.enums.ActivityStatus;
+import com.dam.pms.domain.enums.IterationStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -42,23 +86,19 @@ public class Iteration {
     private Long id;
 
     private String name;
-    private Integer iterationNumber;
+    private Integer number;
+
+    @Enumerated(EnumType.STRING)
+    private IterationStatus status;
+
+    private Double progress = 0.0;
 
     @ManyToOne
     @JoinColumn(name = "project_id")
+    @JsonIgnore
     private Project project;
 
-    @OneToMany(mappedBy = "iteration")
-    private List<Activity> activities;
-
-    // --------- metoda calculateProgress ----------
-    public double calculateProgress() {
-        if (activities == null || activities.isEmpty()) return 0.0;
-
-        long done = activities.stream()
-                .filter(a -> a.getStatus() == ActivityStatus.DONE)
-                .count();
-
-        return ((double) done / activities.size()) * 100;
-    }
+    @OneToMany(mappedBy = "iteration", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Activity> activities = new ArrayList<>();
 }

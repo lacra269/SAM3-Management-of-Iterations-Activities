@@ -1,0 +1,412 @@
+{
+  "info": {
+    "name": "PMS API - Sprint 4",
+    "description": "Project Management System REST API endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080/api",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Projects",
+      "item": [
+        {
+          "name": "Get All Projects",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/projects"
+          }
+        },
+        {
+          "name": "Get Project by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/projects/1"
+          }
+        },
+        {
+          "name": "Create Project",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"New PMS Project\",\n  \"description\": \"Project Management System\",\n  \"status\": \"ACTIVE\"\n}"
+            },
+            "url": "{{baseUrl}}/projects"
+          }
+        },
+        {
+          "name": "Update Project",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Project\",\n  \"description\": \"Updated description\",\n  \"status\": \"ON_HOLD\"\n}"
+            },
+            "url": "{{baseUrl}}/projects/1"
+          }
+        },
+        {
+          "name": "Delete Project",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/projects/1"
+          }
+        },
+        {
+          "name": "Get Projects by Status",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/projects/status/ACTIVE"
+          }
+        },
+        {
+          "name": "Get Project Progress",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/projects/1/progress"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Activities",
+      "item": [
+        {
+          "name": "Get All Activities",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/activities"
+          }
+        },
+        {
+          "name": "Get Activity by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/activities/1"
+          }
+        },
+        {
+          "name": "Create Activity",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Implement REST API\",\n  \"description\": \"Create REST controllers for all entities\",\n  \"status\": \"TODO\",\n  \"priority\": \"HIGH\",\n  \"estimatedHours\": 16.0,\n  \"createdDate\": \"2024-12-01\",\n  \"dueDate\": \"2024-12-15\",\n  \"iteration\": {\n    \"id\": 1\n  }\n}"
+            },
+            "url": "{{baseUrl}}/activities"
+          }
+        },
+        {
+          "name": "Update Activity",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Updated Activity\",\n  \"description\": \"Updated description\",\n  \"status\": \"IN_PROGRESS\",\n  \"actualHours\": 8.0\n}"
+            },
+            "url": "{{baseUrl}}/activities/1"
+          }
+        },
+        {
+          "name": "Change Activity Status",
+          "request": {
+            "method": "PATCH",
+            "url": {
+              "raw": "{{baseUrl}}/activities/1/status?status=IN_PROGRESS&memberId=1",
+              "query": [
+                {
+                  "key": "status",
+                  "value": "IN_PROGRESS"
+                },
+                {
+                  "key": "memberId",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Add Subtask",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Create ProjectController\",\n  \"status\": \"TODO\"\n}"
+            },
+            "url": "{{baseUrl}}/activities/1/subtasks"
+          }
+        },
+        {
+          "name": "Get Activities by Status",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/activities/status/TODO"
+          }
+        },
+        {
+          "name": "Get Activities by Iteration",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/activities/iteration/1"
+          }
+        },
+        {
+          "name": "Get Activities by Member",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/activities/assigned/1"
+          }
+        },
+        {
+          "name": "Delete Activity",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/activities/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Iterations",
+      "item": [
+        {
+          "name": "Get All Iterations",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/iterations"
+          }
+        },
+        {
+          "name": "Get Iteration by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/iterations/1"
+          }
+        },
+        {
+          "name": "Create Iteration",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Sprint 4\",\n  \"number\": 4,\n  \"status\": \"ACTIVE\",\n  \"project\": {\n    \"id\": 1\n  }\n}"
+            },
+            "url": "{{baseUrl}}/iterations"
+          }
+        },
+        {
+          "name": "Update Iteration",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Sprint 4 - Updated\",\n  \"status\": \"COMPLETED\"\n}"
+            },
+            "url": "{{baseUrl}}/iterations/1"
+          }
+        },
+        {
+          "name": "Get Iterations by Project",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/iterations/project/1"
+          }
+        },
+        {
+          "name": "Delete Iteration",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/iterations/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Team Members",
+      "item": [
+        {
+          "name": "Get All Members",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/team-members"
+          }
+        },
+        {
+          "name": "Get Member by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/team-members/1"
+          }
+        },
+        {
+          "name": "Create Team Member",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Developer\",\n  \"email\": \"john@example.com\",\n  \"role\": \"DEVELOPER\",\n  \"skills\": \"Java, Spring Boot, REST APIs\",\n  \"isActive\": true\n}"
+            },
+            "url": "{{baseUrl}}/team-members"
+          }
+        },
+        {
+          "name": "Update Team Member",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Senior Developer\",\n  \"role\": \"DEVELOPER\",\n  \"skills\": \"Java, Spring Boot, Microservices\"\n}"
+            },
+            "url": "{{baseUrl}}/team-members/1"
+          }
+        },
+        {
+          "name": "Get Members by Role",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/team-members/role/DEVELOPER"
+          }
+        },
+        {
+          "name": "Get Active Members",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/team-members/active"
+          }
+        },
+        {
+          "name": "Delete Member",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/team-members/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Risks",
+      "item": [
+        {
+          "name": "Get All Risks",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/risks"
+          }
+        },
+        {
+          "name": "Get Risk by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/risks/1"
+          }
+        },
+        {
+          "name": "Create Risk",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Database performance issues\",\n  \"severity\": \"HIGH\",\n  \"resolved\": false,\n  \"project\": {\n    \"id\": 1\n  }\n}"
+            },
+            "url": "{{baseUrl}}/risks"
+          }
+        },
+        {
+          "name": "Get Risks by Project",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/risks/project/1"
+          }
+        },
+        {
+          "name": "Get Unresolved Risks",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/risks/unresolved"
+          }
+        },
+        {
+          "name": "Resolve Risk",
+          "request": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/risks/1/resolve"
+          }
+        },
+        {
+          "name": "Delete Risk",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/risks/1"
+          }
+        }
+      ]
+    }
+  ]
+}

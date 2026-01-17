@@ -5,5 +5,7 @@ public enum ActivityStatus {
     IN_PROGRESS,
     IN_REVIEW,
     DONE,
-    BLOCKED
+    BLOCKED,
+    TESTING
+
 }

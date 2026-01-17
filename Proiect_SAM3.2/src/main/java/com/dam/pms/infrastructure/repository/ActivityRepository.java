@@ -2,12 +2,15 @@ package com.dam.pms.infrastructure.repository;
 
 import com.dam.pms.domain.entity.Activity;
 import com.dam.pms.domain.entity.TeamMember;
+import com.dam.pms.domain.enums.ActivityStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
-public interface ActivityRepository extends JpaRepository<Activity, Long> {
-    List<Activity> findByAssignedTo(TeamMember member);
+public interface ActivityRepository
+        extends JpaRepository<Activity, Long>, ActivityRepositoryCustom {
+
+    List<Activity> findByAssignedTo(TeamMember assignedTo);
+    List<Activity> findByStatus(ActivityStatus status);
+    List<Activity> findByIterationId(Long iterationId);
 }
