@@ -80,6 +80,11 @@ public class Subtask {
     @JsonIgnore
     private Activity activity;
 
+    //Relație cu TeamMember pentru asignare individuală
+    @ManyToOne
+    @JoinColumn(name = "assigned_to_id")
+    private TeamMember assignedTo;
+
     public void setStatus(ActivityStatus status) {
         this.status = status;
     }

@@ -93,7 +93,7 @@ class ActivityServiceSimpleTest {
 
         // 2) Create iteration
         Iteration it = new Iteration();
-        it.setName("Iter Test");
+        it.setName("Sprint 1");
         it.setProject(p);
         iterationRepository.save(it);
 
@@ -106,6 +106,8 @@ class ActivityServiceSimpleTest {
         a.setCreatedDate(LocalDate.now());
         a.setDueDate(LocalDate.now().plusDays(5));
         a.setIteration(it);
+
+
 
 // IMPORTANT → menții integritatea relației bidirecționale
         it.getActivities().add(a);

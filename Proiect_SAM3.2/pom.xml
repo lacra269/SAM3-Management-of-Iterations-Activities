@@ -15,13 +15,35 @@
     <groupId>com.dam</groupId>
     <artifactId>pms</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <properties>
         <java.version>21</java.version>
         <kotlin.version>1.9.23</kotlin.version>
+        <vaadin.version>24.3.5</vaadin.version>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-bom</artifactId>
+                <version>${vaadin.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
+
+        <!-- Vaadin Spring Boot Starter (înlocuiește vaadin-boot) -->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-spring-boot-starter</artifactId>
+        </dependency>
 
         <!-- Spring Web -->
         <dependency>
@@ -70,10 +92,6 @@
             <version>${kotlin.version}</version>
         </dependency>
 
-
-
-
-
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-test</artifactId>
@@ -89,6 +107,14 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
             </plugin>
 
             <!-- Kotlin compiler -->
@@ -120,10 +146,4 @@
         </plugins>
     </build>
 
-
-
-
-
 </project>
-
-
